@@ -60,21 +60,21 @@ function requestIDinput(participantType, workerID) {
 var fullscreenMessage = `<p>This experiment needs to be run in “fullscreen” mode, rather than a small browser window. Please click the button below to automatically send the browser into fullscreen mode. It is very important that you <b>stay in fullscreen throughout the entire experiment</b>. And do not worry: When the experiment is done, we will turn fullscreen mode back off again. Thank you.</p>`
 
 function loadInstrContent() {
-    var instrContent = [
-        /* ind0 */ '<p>Hello! Thank you for participating in our study. Please take a moment to adjust your seating so that you can comfortably watch the monitor and use the keyboard. Feel free to dim the lights as well.</p><p>Close the door or do whatever is necessary to <b>minimize disturbance during the experiment</b>. Please also take a moment to silence your phone so that you are not interrupted by any messages mid-experiment. Do <i>not</i> switch to any other tabs or windows until you are complete.</p>',
-        /* ind1 */ `<p>In this quick experiment, you will see an image of a circle flash on screen. The circle will either be <b>orange</b> or <b>blue</b>, as shown below:</p><p><div style='text-align: center'><img src="${stimFolder}demo-circles.png" height="${imgHeight}"/></div></p>`,
-        /* ind2 */ `<p>These images will flash on screen for only a short amount of time, so pay close attention!</p><p>Your task is straightforward: If the circle is <strong>blue</strong>, <strong><i>press "f"</i></strong> on the keyboard as quickly as you can. But if the circle is <strong>orange</strong>, <strong><i>press "j"</i></strong> as quickly as you can.</p><p>Let's give this a try now! Press the button below when you're ready to practice this once!</p>`,
-        /* ind3 */ `<p>Good work so far.</p><p>Sometimes, you may be unsure of your answer. This is okay, since the task is designed to be difficult, as images flash quickly!  In times like this, just give it your <b>best guess</b>, as we are interested in your <i>gut intuition</i>.</p><p>Please do your very best to remain as focused and attentive as possible, even at the end of the experiment. I know it is very difficult to stay focused for so long, especially when you are doing the same thing over and over. But remember, the experiment will be all over in less than ${String(estTotalRunTime)} minutes. Press the button below to begin.`,
-    ];
+     var instrContent = [
+         /* ind0 */ '<p>Hello! Thank you for participating in our study. Please take a moment to adjust your seating so that you can comfortably watch the monitor and use the keyboard. Feel free to dim the lights as well.</p><p>Close the door or do whatever is necessary to <b>minimize disturbance during the experiment</b>. Please also take a moment to silence your phone so that you are not interrupted by any messages mid-experiment. Do <i>not</i> switch to any other tabs or windows until you are complete.</p>',
+         /* ind1 */ `<p>In this quick experiment, you will see an image of a circle flash on screen. The circle will either be <b>orange</b> or <b>blue</b>, as shown below:</p><p><div style='text-align: center'><img src="${stimFolder}demo-circles.png" height="${imgHeight}"/></div></p>`,
+         /* ind2 */ `<p>These images will flash on screen for only a short amount of time, so pay close attention!</p><p>Your task is straightforward: If the circle is <strong>blue</strong>, <strong><i>press "f"</i></strong> on the keyboard as quickly as you can. But if the circle is <strong>orange</strong>, <strong><i>press "j"</i></strong> as quickly as you can.</p><p>Let's give this a try now! Press the button below when you're ready to practice this once!</p>`,
+         /* ind3 */ `<p>Good work so far.</p><p>Sometimes, you may be unsure of your answer. This is okay, since the task is designed to be difficult, as images flash quickly!  In times like this, just give it your <b>best guess</b>, as we are interested in your <i>gut intuition</i>.</p><p>Please do your very best to remain as focused and attentive as possible, even at the end of the experiment. I know it is very difficult to stay focused for so long, especially when you are doing the same thing over and over. But remember, the experiment will be all over in less than ${String(estTotalRunTime)} minutes. Press the button below to begin.`,
+     ];
 
-    for (var i = 0; i < instrContent.length; i++) {
-        instrContent[i] =
-            "<div style='display: inline-block; margin: 0 auto; padding: 10px 200px 10px 200px; text-align: left'>" +
-            instrContent[i] +
-            '</div>';
-    }
-    return instrContent;
-} // end function
+     for (var i = 0; i < instrContent.length; i++) {
+         instrContent[i] =
+             "<div style='display: inline-block; margin: 0 auto; padding: 10px 200px 10px 200px; text-align: left'>" +
+             instrContent[i] +
+             '</div>';
+     }
+     return instrContent;
+}// end function
 
 function consentForm(participantType) {
     if (participantType == 'sona') {

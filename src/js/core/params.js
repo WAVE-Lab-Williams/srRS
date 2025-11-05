@@ -4,10 +4,30 @@ Defining Parameter Variables
 ===============================================================
 */
 
-var stimFolder = 'src/assets/stimuli/circles/'
+// people from https://osf.io/egj7c/overview
 
-var runIntro = true;
-var runInstr = true;
+
+var stimFolder = 'src/assets/stimuli/peoples/cropped_peoples/'
+
+var PEOPLE = [
+    'AF221.png', 'AF232.png', 'AF254.png', 'AM207.png', 'AM236.png',
+    'AM259.png', 'BF11.png', 'BF19.png', 'BF56.png', 'BM11.png',
+    'BM21.png', 'BM84.png', 'WF23.png', 'WF70.png', 'WF106.png',
+    'WM1.png', 'WM10.png', 'WM64.png',
+]; 
+
+// added parameters for visual search
+const cols = 3;
+const rows = 3;
+var MIN_SCALE = 10; // 30%
+var MAX_SCALE = 90; // 150%
+
+//slider variables
+const slider_max = 200
+const slider_min = 50
+
+var runIntro = false;
+var runInstr = false;
 var runExpt = true;
 var runClose = true;
 var runPreload = true;
@@ -47,7 +67,7 @@ var h =
 // setting display image width
 var origWidth = 300;
 var origHeight = 300;
-var imgWidth = 150; // your desired display img width
+var imgWidth = 200; // your desired display img width
 var imgHeight = (imgWidth / origWidth) * origHeight;
 
 

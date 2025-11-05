@@ -161,13 +161,19 @@ INSTR PROCEDURE (*sec_instr)
 
 /* -------  Set Preload Images for Instr + Demo (*preload_instr) -------------- */
 
-forPreload.push(`${stimFolder}demo-circles.png`);
+// forPreload.push(`${stimFolder}demo-circles.png`);
 // make sure to load any images you need for the demo itself. Usually you have different demo images than the main expt, such that you don't give away the content of the expt itself (but still give the participant practice and familiarity with the task. In this case, though, the demo images themselves are identical to the main expt. Variable names are the only difference.
 var demo_circle_colors = ["blue","orange"];
 var demo_display_durations = [200, 500];
-for (var i = 0; i < demo_circle_colors.length; i++) {
-    forPreload.push(`${stimFolder}${demo_circle_colors[i]}-circle.png`);
+
+
+
+// preload new people images!
+for (var i = 0; i < PEOPLE.length; i++) {
+    forPreload.push(stimFolder + PEOPLE[i]);
 }
+
+
 
 //decide what the parameters for the demo trial should be. Sometimes you hardcode this, sometimes you randomly choose from the options you defined above.
 var thisDemoCircle = randomChoice(demo_circle_colors,1)[0];
@@ -209,7 +215,7 @@ var instructions2 = {
 };
 
 timelineinstr.push(instructions1);
-runSingleTrial(thisDemoCircle,thisDemoDispDuration,timelineinstr,"prac") // pushesyour demo trial
+//runSingleTrial(timelineinstr, 0) // pushesyour demo trial
 timelineinstr.push(instructions2);
 
 /*
@@ -220,30 +226,44 @@ EXPERIMENT SECTION (*sec_expt)
 
 /* -------- defining factors && exptdesign (*factors) --------*/
 
-var poss_circle_colors = ["blue","orange"];
-var poss_disp_duration = [200, 500];
+//set number of trials to the number of people - could be an integer instead
+
 
 var factors = {
-    circle_color: poss_circle_colors,
-    disp_duration: poss_disp_duration
+    poss_display_times: [5000],
+    target_person: ["wM","wF","aF","aM","bF","bM"]
 }
 
-var full_design = jsPsych.randomization.factorial(factors, 1);
+var full_design = jsPsych.randomization.factorial(factors, 4);
 console.log(full_design);
 
-/* -------  Set Preload Images for Expt (*preload_expt) -------------- */
-for (var i = 0; i < poss_circle_colors.length; i++) {
-    forPreload.push(`${stimFolder}${poss_circle_colors[i]}-circle.png`);
-}
+// set up grid with evenly centered points 
+let boxWidth = w/cols;
+let boxHeight = h/rows;
+let evenCoords_x = [];
+let evenCoords_y = [];
+
+for(let row = 0; row < rows; row++ ) {
+    for(let col = 0; col < cols; col++) {
+        //calculate coordinates (evenly spaced - center points)
+        let x = (col * boxWidth + (boxWidth/2))
+        let y = (row * boxHeight + (boxHeight/2))
+
+        evenCoords_x.push(x)
+        evenCoords_y.push(y)
+    
+    }
+};
+
+
+// /* -------  Set Preload Images for Expt (*preload_expt) -------------- */
+// for (var i = 0; i < poss_circle_colors.length; i++) {
+//     forPreload.push(`${stimFolder}${poss_circle_colors[i]}-circle.png`);
+// }
 
 /* ------- timeline expt push (*pushExpt ) -------------- */
-for (var elem = 0; elem < full_design.length; elem++) {
-    runSingleTrial(
-        full_design[elem].circle_color,
-        full_design[elem].disp_duration,
-        timelineexpt,
-        'expt',
-    );
+for (var t = 0; t < full_design.length; t++) {
+  runSingleTrial(full_design.target_person, full_design.dispTime, evenCoords_x, evenCoords_y ,timelineexpt, t);
 }
 
 /*
